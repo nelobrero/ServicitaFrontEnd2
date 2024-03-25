@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { HomePage, ProfilePage, MessagePage, BookingPage } from './screens';
+import { HomePage, ProfilePage, MessagePage, BookingPage, Header, Filter, Services } from './screens';
+import PopularServices from './screens/PopularServices';
+import {Cleaning} from './screens'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import Filter from './screens/Filter';
-import { createNativeStackNavigator } from '@react-navigation/stack';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab =createBottomTabNavigator()
 const screenOptions = {
@@ -25,17 +25,36 @@ const screenOptions = {
     }
 }
 
+
+
+const HomeScreenWithStackNav = () => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <Stack.Navigator initialRouteName='HomePage' screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='HomePage' component={HomePage} />
+      <Stack.Screen name='Filter' component={Filter} />
+      <Stack.Screen name='Services' component={Services} />
+      <Stack.Screen name='Cleaning' component={Cleaning} />
+      <Stack.Screen name='PopularServices' component={PopularServices} />
+    </Stack.Navigator>
+  );
+};
+
+
+  
+
+
 export default function App() {
   return (
   
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Home" component={HomePage}
+        <Tab.Screen name="Home" component={HomeScreenWithStackNav}
           options={{
             tabBarIcon: ({focused})=>{
               return(
                 <View style={{alignItems:"center", justifyContent:"center"}}>
-                <Entypo name="home" size={30} color={focused ? "#16247d": "#000"}/>
+                <Entypo name="home" size={30} color={focused ? "#0071A5": "#07364B"}/>
               </View>
               )
             }
@@ -47,7 +66,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <Entypo name="calendar" size={30} color={focused ? "#16247d": "#000"} />
+              <Entypo name="calendar" size={30} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
@@ -59,7 +78,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <MaterialCommunityIcons name="message-outline" size={30} color={focused ? "#16247d": "#000"} />
+              <MaterialCommunityIcons name="message-outline" size={30} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
@@ -71,7 +90,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <MaterialCommunityIcons name="account-outline" size={35} color={focused ? "#16247d": "#000"} />
+              <MaterialCommunityIcons name="account-outline" size={35} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
@@ -90,4 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  icon:{
+    color:'#0071A5'
+  }
 });
