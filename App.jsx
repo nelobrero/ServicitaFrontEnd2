@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { HomePage, ProfilePage, MessagePage, BookingPage, Header, Filter, Services } from './screens';
+import { HomePage, ProfilePage, MessagePage, BookingPage, Header, Filter, Services, ChooseLocation, Chat } from './screens';
 import PopularServices from './screens/PopularServices';
 import {Cleaning} from './screens'
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { LogBox } from 'react-native';
 
 const Tab =createBottomTabNavigator()
 const screenOptions = {
@@ -36,6 +37,10 @@ const HomeScreenWithStackNav = () => {
       <Stack.Screen name='Services' component={Services} />
       <Stack.Screen name='Cleaning' component={Cleaning} />
       <Stack.Screen name='PopularServices' component={PopularServices} />
+      <Stack.Screen name='ChooseLocation' component={ChooseLocation} />
+      <Stack.Screen name='Chat' component={Chat} />
+
+
     </Stack.Navigator>
   );
 };
@@ -45,6 +50,9 @@ const HomeScreenWithStackNav = () => {
 
 
 export default function App() {
+
+  LogBox.ignoreAllLogs();
+
   return (
   
     <NavigationContainer>
@@ -54,7 +62,7 @@ export default function App() {
             tabBarIcon: ({focused})=>{
               return(
                 <View style={{alignItems:"center", justifyContent:"center"}}>
-                <Entypo name="home" size={30} color={focused ? "#0071A5": "#07364B"}/>
+                <Entypo name="home" size={24} color={focused ? "#0071A5": "#07364B"}/>
               </View>
               )
             }
@@ -66,7 +74,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <Entypo name="calendar" size={30} color={focused ? "#0071A5": "#07364B"} />
+              <Entypo name="calendar" size={24} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
@@ -78,7 +86,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <MaterialCommunityIcons name="message-outline" size={30} color={focused ? "#0071A5": "#07364B"} />
+              <MaterialCommunityIcons name="message-outline" size={24} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
@@ -90,7 +98,7 @@ export default function App() {
           tabBarIcon: ({focused})=>{
             return(
               <View style={{alignItems:"center", justifyContent:"center"}}>
-              <MaterialCommunityIcons name="account-outline" size={35} color={focused ? "#0071A5": "#07364B"} />
+              <MaterialCommunityIcons name="account-outline" size={24} color={focused ? "#0071A5": "#07364B"} />
             </View>
             )
           }
